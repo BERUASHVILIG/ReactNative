@@ -1,41 +1,28 @@
-import { useState } from "react";
-import { Text, View, Button, Modal, StatusBar } from "react-native";
+import { View, ActivityIndicator, Button, Alert } from "react-native";
 
 export default function App() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isStatusBarVisible, setStatusBarVisible] = useState(false);
   return (
     <View style={{ flex: 1, backgroundColor: "yellow", padding: 60 }}>
-      <StatusBar
-        backgroundColor="blue"
-        barStyle="dark-content"
-        hidden={!isStatusBarVisible}
-      />
-      <Button
-        title={isStatusBarVisible ? "hide statusbar" : "show statusbar"}
-        onPress={() => setStatusBarVisible(!isStatusBarVisible)}
-      />
-      <Button
-        title="Open Modal"
-        onPress={() => setIsModalVisible(true)}
+      <ActivityIndicator
+        size="large"
         color="midnightblue"
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        // animating={false} // animating prop for controll visibilty using state
       />
-      <Modal
-        visible={isModalVisible}
-        onRequestClose={() => setIsModalVisible(false)}
-        animationType="fade"
-        presentationStyle="pageSheet"
-        // presentationStyle only works on android
-      >
-        <View style={{ flex: 1, backgroundColor: "green", padding: 60 }}>
-          <Text>Modal Text</Text>
-          <Button
-            title="Close Modal"
-            color="red"
-            onPress={() => setIsModalVisible(false)}
-          />
-        </View>
-      </Modal>
+      <Button title="Alert" onPress={() => Alert.alert("Invalid data")} />
+      <Button
+        title="Alert2"
+        onPress={() => Alert.alert("Invalid data", "DOB incorrect")}
+      />
+      <Button
+        title="Alert3"
+        onPress={() =>
+          Alert.alert("Invalid data", "DOB incorrect", [
+            { text: "Cencel", onPress: () => console.log("cencel pressed") },
+            { text: "OK", onPress: () => console.log("OK pressed") },
+          ])
+        }
+      />
     </View>
   );
 }
