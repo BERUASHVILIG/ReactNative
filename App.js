@@ -1,31 +1,35 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
-import Box from "./components/Box";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Box style={{ backgroundColor: "#342132" }}>Box 1</Box>
-      <Box style={{ backgroundColor: "#265655" }}>Box 2</Box>
-      <Box style={{ backgroundColor: "#257755", flexBasis: 140, flex: 1 }}>
-        Box 3
-      </Box>
-      <Box style={{ backgroundColor: "#755126", height: 140, flex: 1 }}>
-        Box 4
-      </Box>
-      {/* in this case flexBasis property will increase use of flex property but the box with height property
-       is ignored and take place that is left over   */}
-      <Box style={{ backgroundColor: "#338598" }}>Box 5</Box>
-      <Box style={{ backgroundColor: "#789922" }}>Box 6</Box>
+      <View style={styles.box}>
+        <Text style={styles.text}>Welcome!</Text>
+      </View>
     </View>
   );
 }
 
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
+console.log({ windowHeight, windowWidth });
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 300,
-    marginTop: 64,
-    borderWidth: 6,
-    borderColor: "red",
+    backgroundColor: "plum",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  box: {
+    width: windowWidth > 500 ? "70%" : "90%",
+    height: windowHeight > 500 ? "60%" : "90%",
+    backgroundColor: "lightblue",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: windowWidth > 500 ? 50 : 24,
   },
 });
