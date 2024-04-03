@@ -1,27 +1,8 @@
-import { useState, useEffect } from "react";
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { View, StyleSheet, Text, useWindowDimensions } from "react-native";
 
 export default function App() {
-  const [dimensions, setDimensions] = useState({
-    window: Dimensions.get("window"),
-  });
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      setDimensions({ window: Dimensions.get("window") });
-    };
-
-    Dimensions.addEventListener("change", updateDimensions);
-
-    return () => {
-      Dimensions.removeEventListener("change", updateDimensions);
-    };
-  }, []);
-
-  const { window } = dimensions;
-  const windowWidth = window.width;
-  const windowHeight = window.height;
-
+  const windowWidth = useWindowDimensions().width;
+  const windowHeight = useWindowDimensions().height;
   return (
     <View style={styles.container}>
       <View
@@ -38,11 +19,6 @@ export default function App() {
     </View>
   );
 }
-
-// const windowWidth = Dimensions.get("window").width;
-// const windowHeight = Dimensions.get("window").height;
-
-// console.log({ windowHeight, windowWidth });
 
 const styles = StyleSheet.create({
   container: {
