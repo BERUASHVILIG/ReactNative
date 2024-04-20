@@ -1,40 +1,23 @@
-import { View, StyleSheet, Text, useWindowDimensions } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./app/Home";
+import About from "./app/About";
 
-export default function App() {
-  const windowWidth = useWindowDimensions().width;
-  const windowHeight = useWindowDimensions().height;
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <View
-        style={[
-          styles.box,
-          {
-            width: windowWidth > 500 ? "70%" : "90%",
-            height: windowHeight > 500 ? "60%" : "90%",
-          },
-        ]}
-      >
-        <Text style={{ fontSize: windowWidth > 500 ? 50 : 24 }}>Welcome!</Text>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          // options={{ title: "Home Overview" }}
+        />
+        <Stack.Screen name="About" component={About} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "plum",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  box: {
-    // width: windowWidth > 500 ? "70%" : "90%",
-    // height: windowHeight > 500 ? "60%" : "90%",
-    backgroundColor: "lightblue",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  // text: {
-  //   fontSize: windowWidth > 500 ? 50 : 24,
-  // },
-});
+export default App;
